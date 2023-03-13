@@ -11,6 +11,7 @@ export default function Signup() {
     e.preventDefault();
     if (password1 === password) {
       signup(email, password, displayName);
+      resetForm();
     } else {
       console.log("Password does not match");
       resetForm();
