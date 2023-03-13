@@ -1,12 +1,13 @@
 import styles from "./Login.module.css";
 import React, { useState } from "react";
-
+import { useLogin } from "../../hooks/useLogin.js";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { login, error, isPending } = useLogin();
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(email, password);
+    login(email, password);
   };
   return (
     // NOTE since we used the subtraction sign we must format our styles as follows
@@ -28,7 +29,13 @@ export default function Login() {
           type="password"
         />
       </label>
-      <button className="btn">Login</button>
+      {!isPending && <button className="btn">Login</button>}
+      {isPending && (
+        <button className="btn" disabled>
+          loading
+        </button>
+      )}
+      {error && <p>{error}</p>}
     </form>
   );
 }
