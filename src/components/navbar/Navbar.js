@@ -22,11 +22,14 @@ export default function Navbar() {
           </>
         )}
         {user && (
-          <li>
-            <button onClick={logout} className="btn">
-              Logout
-            </button>
-          </li>
+          <>
+            <li>hello, {user?.displayName}</li>
+            <li>
+              <button onClick={logout} className="btn">
+                Logout
+              </button>
+            </li>
+          </>
         )}
       </ul>
     </nav>
