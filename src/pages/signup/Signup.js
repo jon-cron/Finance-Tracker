@@ -1,15 +1,16 @@
 import styles from "./Signup.module.css";
 import React, { useState } from "react";
-
+import useSignup from "../../hooks/useSignup.js";
 export default function Signup() {
   const [email, setEmail] = useState("");
   const [displayName, setDisplayName] = useState("");
   const [password1, setPassword1] = useState("");
-  const [password2, setPassword2] = useState("");
+  const [password, setPassword] = useState("");
+  const { signup, isPending, error } = useSignup();
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (password1 === password2) {
-      console.log(displayName);
+    if (password1 === password) {
+      signup(email, password, displayName);
     } else {
       console.log("Password does not match");
       resetForm();
@@ -18,7 +19,7 @@ export default function Signup() {
   const resetForm = () => {
     setEmail("");
     setPassword1("");
-    setPassword2("");
+    setPassword("");
     setDisplayName("");
   };
   return (
@@ -56,12 +57,18 @@ export default function Signup() {
         <span>Reenter Password</span>
         <input
           required
-          onChange={(e) => setPassword2(e.target.value)}
-          value={password2}
+          onChange={(e) => setPassword(e.target.value)}
+          value={password}
           type="password"
         />
       </label>
-      <button className="btn">SignUp</button>
+      {!isPending && <button className="btn">SignUp</button>}
+      {error && <p>{error}</p>}
+      {isPending && (
+        <button className="btn" disabled>
+          loading
+        </button>
+      )}
     </form>
   );
 }
