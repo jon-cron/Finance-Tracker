@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { projectAuth } from "../firebase/config.js";
+import { useAuthContext } from "./useAuthContext.js";
 export default function useSignup() {
+  const { dispatch } = useAuthContext();
   const [error, setError] = useState(null);
   const [isPending, setIsPending] = useState(false);
   // NOTE email password and displayName are firebase specific for user info
@@ -13,11 +15,11 @@ export default function useSignup() {
         email,
         password
       );
-      console.log(res.user);
       if (!res) {
         throw new Error("Could not signUp");
       }
       await res.user.updateProfile({ displayName });
+      dispatch({ type: "LOGIN", payload: res.user });
       setIsPending(false);
       setError(null);
     } catch (error) {
