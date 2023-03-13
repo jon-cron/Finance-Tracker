@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { projectAuth } from "../firebase/config.js";
 import { useAuthContext } from "./useAuthContext.js";
-const useLogout = () => {
+export const useLogout = () => {
   const [error, setError] = useState(null);
   const [isPending, setIsPending] = useState(false);
   const { dispatch } = useAuthContext();
