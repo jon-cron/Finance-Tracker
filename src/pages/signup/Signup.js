@@ -3,13 +3,13 @@ import React, { useState } from "react";
 
 export default function Signup() {
   const [email, setEmail] = useState("");
-  const [userName, setUserName] = useState("");
+  const [displayName, setDisplayName] = useState("");
   const [password1, setPassword1] = useState("");
   const [password2, setPassword2] = useState("");
   const handleSubmit = (e) => {
     e.preventDefault();
     if (password1 === password2) {
-      console.log(userName);
+      console.log(displayName);
     } else {
       console.log("Password does not match");
       resetForm();
@@ -19,7 +19,7 @@ export default function Signup() {
     setEmail("");
     setPassword1("");
     setPassword2("");
-    setUserName("");
+    setDisplayName("");
   };
   return (
     // NOTE since we used the subtraction sign we must format our styles as follows
@@ -35,11 +35,11 @@ export default function Signup() {
         />
       </label>
       <label>
-        <span>Username</span>
+        <span>Display Name</span>
         <input
           required
-          onChange={(e) => setUserName(e.target.value)}
-          value={userName}
+          onChange={(e) => setDisplayName(e.target.value)}
+          value={displayName}
           type="text"
         />
       </label>
