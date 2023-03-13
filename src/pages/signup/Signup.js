@@ -12,7 +12,14 @@ export default function Signup() {
       console.log(userName);
     } else {
       console.log("Password does not match");
+      resetForm();
     }
+  };
+  const resetForm = () => {
+    setEmail("");
+    setPassword1("");
+    setPassword2("");
+    setUserName("");
   };
   return (
     // NOTE since we used the subtraction sign we must format our styles as follows
@@ -46,7 +53,7 @@ export default function Signup() {
         />
       </label>
       <label>
-        <span>Password</span>
+        <span>Reenter Password</span>
         <input
           required
           onChange={(e) => setPassword2(e.target.value)}
@@ -54,7 +61,7 @@ export default function Signup() {
           type="password"
         />
       </label>
-      <button className="btn">Login</button>
+      <button className="btn">SignUp</button>
     </form>
   );
 }
