@@ -5,7 +5,13 @@ import TransactionForm from "./TransactionForm.js";
 import { useCollection } from "../../hooks/useCollection.js";
 import TransactionList from "./TransactionList.js";
 export default function Home() {
-  const { documents, error } = useCollection("transactions");
+  // NOTE to query a firestore db we must put .where() after the collection with our params
+  // NOTE Firestore params are as follows for version 8 .where("value", "relationship", "what we want to find") .where("price", ">", "25")
+  const { documents, error } = useCollection("transactions", [
+    "udi",
+    "==",
+    user.uid,
+  ]);
   const { user } = useAuthContext();
   return (
     <div className={styles.container}>
