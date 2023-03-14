@@ -34,6 +34,13 @@ const firestoreReducer = (state, action) => {
         success: false,
         document: null,
       };
+    case "DELETED_DOCUMENT":
+      return {
+        isPending: false,
+        document: null,
+        error: null,
+        success: true,
+      };
     default:
       return state;
   }
@@ -69,7 +76,20 @@ export const useFirestore = (collection) => {
   };
   //delete
   // NOTE id is the param set to the hook to find the document to delete out of our db.
-  const deleteDocument = (id) => {};
+  const deleteDocument = async (id) => {
+    dispatch({ type: "IS_PENDING" });
+    try {
+      await ref.doc(id).delete();
+      dispatchIfNotCancelled({
+        type: "DELETED_DOCUMENT",
+      });
+    } catch (error) {
+      dispatchIfNotCancelled({
+        type: "ERROR_MESSAGE",
+        payload: "Could not delete",
+      });
+    }
+  };
   // NOTE this useEffect function only runs if the page is unmounted. This will stop any requests we make to our db thus stopping any errors
   useEffect(() => {
     return () => setIsCancelled(true);

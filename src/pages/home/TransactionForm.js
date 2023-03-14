@@ -4,7 +4,7 @@ export default function TransactionForm({ uid }) {
   const [name, setName] = useState("");
   const [amount, setAmount] = useState("");
   // NOTE if a collection does not exist then firestore will create the collection with the name you send
-  const { addDocument, response } = useFirestore("transactions");
+  const { addDocument } = useFirestore("transactions");
   const handleSubmit = (e) => {
     e.preventDefault();
     // NOTE pass your data as an object
