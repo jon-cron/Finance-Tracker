@@ -26,6 +26,7 @@ export default function Home() {
   );
 }
 // NOTE go into your firestore rules. They should look like this by default
+// NOTE this rules that you see here are  the default "test" rules you selected when you created your Database
 // rules_version = '2';
 // service cloud.firestore {
 //   match /databases/{database}/documents {
