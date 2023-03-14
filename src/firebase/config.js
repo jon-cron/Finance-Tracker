@@ -15,5 +15,7 @@ firebase.initializeApp(firebaseConfig);
 
 const projectAuth = firebase.auth();
 const projectFirestore = firebase.firestore();
+// NOTE this allows us to get back the timestamp that a document was created
+const timestamp = firebase.firestore.Timestamp();
 
-export { projectFirestore, projectAuth };
+export { projectFirestore, projectAuth, timestamp };
