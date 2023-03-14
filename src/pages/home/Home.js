@@ -8,11 +8,11 @@ export default function Home() {
   const { user } = useAuthContext();
   // NOTE to query a firestore db we must put .where() after the collection with our params
   // NOTE Firestore params are as follows for version 8 .where("value", "relationship", "what we want to find") .where("price", ">", "25")
-  const { documents, error } = useCollection("transactions", [
-    "uid",
-    "==",
-    user.uid,
-  ]);
+  const { documents, error } = useCollection(
+    "transactions",
+    ["uid", "==", user.uid],
+    ["createdAt", "desc"]
+  );
   return (
     <div className={styles.container}>
       <div className={styles.content}>
