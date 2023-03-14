@@ -55,11 +55,13 @@ export const useFirestore = (collection) => {
   //add
   // NOTE doc is the param set to the hook via the form.
   const addDocument = async (doc) => {
-    dispatch({ type: "IS_PENDING" });
+    dispatchIfNotCancelled({ type: "IS_PENDING" });
     try {
       // NOTE how to add a createdAt date to a firestore document
       const createdAt = timestamp.fromDate(new Date());
-      const addedDocument = await ref.add(doc);
+      // NOTE createAt is a firestore term createdAt: createAt so we only have to write it once
+      const addedDocument = await ref.add({ ...doc, createdAt });
+      console.log("adding document", addedDocument);
       dispatchIfNotCancelled({ type: "ADD_DOCUMENT", payload: addedDocument });
     } catch (error) {
       dispatch({ type: "ERROR_MESSAGE", payload: error.message });
@@ -74,5 +76,5 @@ export const useFirestore = (collection) => {
   }, []);
 
   // NOTE to export anything place your functions, state, variables here before the last curly boi
-  return { addDocument, deleteDocument };
+  return { addDocument, deleteDocument, response };
 };

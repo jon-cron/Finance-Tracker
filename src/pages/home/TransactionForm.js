@@ -1,11 +1,14 @@
 import React, { useState } from "react";
-
-export default function TransactionForm() {
+import { useFirestore } from "../../hooks/useFirestore.js";
+export default function TransactionForm({ uid }) {
   const [name, setName] = useState("");
   const [amount, setAmount] = useState("");
+  // NOTE if a collection does not exist then firestore will create the collection with the name you send
+  const { addDocument, response } = useFirestore("transactions");
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log({ name, amount });
+    // NOTE pass your data as an object
+    addDocument({ uid, name, amount });
     resetForm();
   };
   const resetForm = () => {
