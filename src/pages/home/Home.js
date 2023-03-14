@@ -35,4 +35,11 @@ export default function Home() {
 //     }
 //   }
 // }
-// NOTE here are more secure rules
+// NOTE use the firebase cli commands as follows
+// firebase init
+// hit enter
+// hit the space bar within the firestore and first hosting option
+// then select existing project and find the firebase project to link to this project
+// when you get to public change that to "build"
+// decline the github option if you so choose to
+// NOTE now that you have done all of that you can change your firestore rules within the firestore.rules file
