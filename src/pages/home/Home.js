@@ -25,3 +25,14 @@ export default function Home() {
     </div>
   );
 }
+// NOTE go into your firestore rules. They should look like this by default
+// rules_version = '2';
+// service cloud.firestore {
+//   match /databases/{database}/documents {
+//     match /{document=**} {
+//       allow read, write: if
+//           request.time < timestamp.date(2023, 4, 13);
+//     }
+//   }
+// }
+// NOTE here are more secure rules
