@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { projectFirestore } from "../firebase/config.js";
 
-export const useCollection = (collection, query) => {
+export const useCollection = (collection, _query) => {
   const [documents, setDocuments] = useState(null);
   const [error, setError] = useState(null);
-
+  // NOTE we are using useRef to avoid an infinite loop with useEffect. useEffect does not like arrays. But if we Reference an array we can get around that cycle
+  // NOTE _query is seen as different on every function call but the reference to _query seems the same
+  const query = useRef(_query).current;
   useEffect(() => {
     let ref = projectFirestore.collection(collection);
     // NOTE to allow for greater versatility we only query if a query was passed in; if not we get the entire collection
@@ -27,6 +29,6 @@ export const useCollection = (collection, query) => {
     );
 
     return () => unsub();
-  }, [collection]);
+  }, [collection, query]);
   return { documents, error };
 };
