@@ -1,5 +1,6 @@
 // NOTE when you finish run "npm run build" in the command line.
 // NOTE once the build is complete run "firebase deploy"
+// NOTE if you want any new changes to take affect redo the previous two steps
 import styles from "./Home.module.css";
 import { useAuthContext } from "../../hooks/useAuthContext.js";
 import React from "react";
